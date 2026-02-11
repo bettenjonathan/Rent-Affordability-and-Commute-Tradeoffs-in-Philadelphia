@@ -1,157 +1,126 @@
-# Philadelphia ZIP Code Affordability vs. Commute Analysis
+# Rent Affordability and Commute Trade-Offs in Philadelphia
 
 ## Overview
-This project analyzes **Philadelphia ZIP codes** to identify areas that balance:
 
-- Housing affordability (rent burden as a percent of income)
-- Commute time (average minutes to work)
+Housing affordability and commute time are two major factors influencing where people choose to live in large cities.
+This project analyzes Philadelphia ZIP-code–level data to identify neighborhoods that provide the best balance between **affordable rent** and **reasonable commute duration**.
 
-Using publicly available U.S. Census / American Community Survey (ACS) data, the analysis builds a reproducible workflow in **R and DuckDB SQL** to score and visualize livability across ZIP codes.
-
-The goal of this project is to demonstrate a realistic, end-to-end data analysis pipeline suitable for entry-level data analyst roles
+The analysis is intended to demonstrate how data can support **urban planning, housing policy, and relocation decision-making**.
 
 ---
 
-## Research Question
-**Which Philadelphia ZIP codes provide the best balance between affordable housing and reasonable commute times?**
+## Business Question
+
+**Which Philadelphia ZIP codes face the highest housing affordability risk when considering rent burden, median income, and commute time?**
 
 ---
 
-## Data Source
-Data comes from the U.S. Census Bureau – American Community Survey (ACS) at the ZIP-code level.
+## Data Sources
 
-Key variables used:
+* U.S. Census / American Community Survey (ACS) neighborhood-level data
+* Median rent, median income, population, and commute duration by ZIP code
 
-- Median rent  
-- Median household income  
-- Population  
-- Average commute time  
-- Share of commuters with 30+ minute commutes  
-- Rent burden (% of income spent on housing)
+All datasets were cleaned, standardized, and merged into a single analysis-ready table.
 
-Some ZIP codes contained missing or suppressed values due to:
+---
 
-- Small population sizes  
-- Non-residential ZIP designations  
-- Dataset merge inconsistencies  
+## Tools and Skills Demonstrated
 
-These rows were excluded in code, while the original raw dataset was preserved for reproducibility.
+* R for data cleaning, transformation, and analysis
+* DuckDB / SQL for querying and aggregation
+* Data wrangling and feature engineering
+* Exploratory data analysis (EDA)
+* Data visualization using ggplot2
+* Reproducible analytical workflow
 
 ---
 
 ## Methodology
 
-### 1. Data Cleaning (DuckDB SQL)
-- Converted numeric fields using `TRY_CAST`
-- Removed percent symbols from rent burden values
-- Filtered rows missing key modeling variables:
-  - rent burden  
-  - commute time  
-  - population  
+**1. Data Cleaning and Integration**
 
-This produced a model-ready dataset for analysis.
+* Standardized column names and data formats across sources
+* Handled missing or inconsistent ZIP-code coverage
+* Merged datasets into one unified table for analysis
 
----
+**2. Metric Construction**
 
-### 2. Affordability–Commute Score
-Each ZIP code received a 0–100 composite score based on:
+* Calculated **rent burden** as a percentage of income
+* Combined affordability and commute indicators into a **composite risk score**
 
-- Rent burden 
-- Average commute time 
+**3. Exploratory Analysis**
 
-Steps:
+* Compared affordability and commute distributions across ZIP codes
+* Evaluated relationships between income, rent, and commute time
 
-1. Applied min–max normalization to both variables  
-2. Used equal 50/50 weighting  
-3. Combined into a single interpretable score  
+**4. Ranking and Visualization**
+
+* Ranked neighborhoods by affordability risk
+* Generated visualizations highlighting **highest-risk** and **most balanced** areas
 
 ---
 
-### 3. Livability Thresholds
-ZIP codes were classified as livable if:
+## Key Insights
 
-- **Rent burden < 30%**  
-  - Standard U.S. housing affordability benchmark  
-- **Average commute < 35 minutes**  
-  - Approximate upper bound of typical U.S. commute times  
+* Several Philadelphia ZIP codes show **high rent burden relative to income**, indicating elevated affordability risk.
+* Shorter commute times are often associated with **higher housing costs**, demonstrating a clear trade-off.
+* Some neighborhoods provide a **balanced combination of moderate rent burden and reasonable commute duration**, making them potentially attractive locations for residents.
 
 ---
 
-## Results
+## Visualization Example
 
-### Livability Distribution
-Only a subset of Philadelphia ZIP codes meet both affordability and commute thresholds.
+Below is an example visualization produced in this analysis showing the relationship between affordability and commute outcomes across ZIP codes.
 
-Many ZIP codes show a trade-off:
+![Affordability vs Commute Visualization](outputs/philly_affordability_commute.png)
 
-- Lower housing cost but longer commute  
-- Short commute but higher housing cost  
-
-This highlights the spatial tension between affordability and accessibility in urban housing markets.
+*Replace `your_plot_filename.png` with the actual filename of one of your generated plots inside the `outputs/` folder.*
 
 ---
 
-### Highest-Scoring ZIP Codes
-The analysis identifies the top ZIP codes that best balance affordability and commute efficiency.
+## Conclusion
 
-Project outputs include:
-
-- Scatter plot of rent burden vs. commute time  
-- Bar chart of the top 10 ZIP codes by composite score  
-- CSV export of scored ZIP-code results  
-
-These visuals provide a clear, decision-ready summary of livable areas.
-
----
-
-## Tools and Technologies
-
-- **R** – data analysis and visualization  
-- **DuckDB** – in-memory SQL data processing  
-- **dplyr / ggplot2** – transformation and plotting  
-- **U.S. Census ACS** – real public data source  
+This project highlights meaningful **geographic differences in housing affordability and commute accessibility** across Philadelphia.
+By integrating demographic, housing, and transportation indicators, the analysis demonstrates how data analysis can inform **policy decisions, planning strategies, and personal housing choices**.
 
 ---
 
 ## Limitations
 
-- Equal weighting of affordability and commute may not reflect all preferences  
-- ZIP-code aggregation hides neighborhood-level variation  
-- Commute time does not distinguish transit mode or traffic variability  
+* ZIP-code aggregation may hide **within-neighborhood variation**.
+* Results represent a **single time snapshot** rather than long-term trends.
+* Additional variables such as crime rates, school quality, and transit access could further refine the analysis.
 
 ---
 
 ## Future Improvements
 
-Potential extensions:
+* Incorporate **multi-year trend analysis**.
+* Add **public transit accessibility** and neighborhood quality indicators.
+* Develop an **interactive dashboard** for exploring affordability trade-offs.
 
-- Sensitivity analysis using different score weightings  
-- Interactive geographic mapping of ZIP scores  
-- Expansion to multiple U.S. cities for comparison  
-- Adding home prices, crime, or transit accessibility metrics  
+---
+
+## How to Run the Project
+
+1. Clone this repository.
+2. Open the main R analysis script.
+3. Install required packages (tidyverse, DuckDB, ggplot2, etc.).
+4. Run the script to reproduce the cleaned data, analysis, and visual outputs.
 
 ---
 
 ## Repository Structure
 
-```
-philly-affordability-analysis/
-│
-├── data/
-│   └── Sample Project.csv
-├── scripts/
-│   └── analysis.R
-├── outputs/
-│   ├── philly_affordability_commute.png
-│   ├── top10_affordability_commute.png
-│   └── philly_clean_scored.csv
-└── README.md
-```
+* `data/` – raw and cleaned datasets
+* `scripts/` – data cleaning and analysis code
+* `outputs/` – generated tables and visualizations
+* `README.md` – project documentation
 
 ---
 
 ## Author
 
-Jonathan Betten  
-University of Massachusetts Amherst — Mathematics    
-Aspiring data analyst
+**Jonathan Betten**
+B.S. Mathematics, University of Massachusetts Amherst
+Aspiring Data Analyst
