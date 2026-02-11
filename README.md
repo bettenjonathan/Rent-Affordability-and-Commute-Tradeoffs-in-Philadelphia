@@ -62,9 +62,14 @@ All datasets were cleaned, standardized, and merged into a single analysis-ready
 
 ## Key Insights
 
-* Several Philadelphia ZIP codes show **high rent burden relative to income**, indicating elevated affordability risk.
-* Shorter commute times are often associated with **higher housing costs**, demonstrating a clear trade-off.
-* Some neighborhoods provide a **balanced combination of moderate rent burden and reasonable commute duration**, making them potentially attractive locations for residents.
+* Approximately **26% of Philadelphia ZIP codes exceed the 30% rent-burden threshold**, indicating that over one quarter of neighborhoods face elevated housing affordability pressure.
+
+* The **median commute time is about 34.4 minutes**, suggesting that a typical resident already experiences a relatively long daily travel burden within the city.
+
+* ZIP codes meeting livability thresholds have **shorter average commutes (31.9 minutes)** compared with **35.3 minutes in non-livable areas**, highlighting a meaningful trade-off between affordability risk and commute duration.
+
+* The ZIP codes with the **highest rent burden** are **19142, 19104, 19132, 19143, and 19133**, where rent consumes roughly **39–43% of income** and commute times range from **about 28 to 38 minutes**, signaling concentrated pockets of affordability stress across the city.
+
 
 ---
 
