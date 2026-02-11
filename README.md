@@ -72,9 +72,7 @@ All datasets were cleaned, standardized, and merged into a single analysis-ready
 
 Below is an example visualization produced in this analysis showing the relationship between affordability and commute outcomes across ZIP codes.
 
-![Affordability vs Commute Visualization](outputs/philly_affordability_commute.png)
-
-*Replace `your_plot_filename.png` with the actual filename of one of your generated plots inside the `outputs/` folder.*
+![Affordability vs Commute Visualization](Outputs/philly_affordability_commute.png)
 
 ---
 
